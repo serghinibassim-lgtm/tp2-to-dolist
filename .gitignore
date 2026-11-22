@@ -50,4 +50,4 @@ Thumbs.db
 backend/.env
 
 backend/node_modules/
-
+frontend/toDolist/node_modules/
