@@ -1,0 +1,34 @@
+.container {
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.add-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-field {
+  flex: 1;
+}
+
+.edit-field {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.task-title {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.task-title.completed {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.error {
+  color: #d32f2f;
+}

@@ -1,0 +1,71 @@
+<mat-toolbar color="primary">
+  <span>{{ title }}</span>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      @if (error()) {
+        <p class="error">{{ error() }}</p>
+      }
+
+      <form class="add-form" (ngSubmit)="addTask()">
+        <mat-form-field appearance="outline" class="title-field">
+          <mat-label>New task title</mat-label>
+          <input
+            matInput
+            type="text"
+            [ngModel]="newTitle()"
+            (ngModelChange)="newTitle.set($event)"
+            name="newTitle"
+          />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+      </form>
+
+      @if (loading()) {
+        <p>Loading...</p>
+      } @else if (tasks().length === 0) {
+        <p>No tasks yet.</p>
+      } @else {
+        <mat-list>
+          @for (task of tasks(); track task._id) {
+            <mat-list-item>
+              <mat-checkbox
+                [checked]="task.completed"
+                (change)="toggleCompleted(task)"
+              ></mat-checkbox>
+
+              @if (editingId() === task._id) {
+                <mat-form-field appearance="outline" class="edit-field">
+                  <input
+                    matInput
+                    type="text"
+                    [ngModel]="editingTitle()"
+                    (ngModelChange)="editingTitle.set($event)"
+                    name="editingTitle"
+                  />
+                </mat-form-field>
+                <button mat-button color="primary" (click)="saveEdit(task)">Save</button>
+                <button mat-button (click)="cancelEdit()">Cancel</button>
+              } @else {
+                <span
+                  class="task-title"
+                  [class.completed]="task.completed"
+                >
+                  {{ task.title }}
+                </span>
+                <button mat-icon-button (click)="startEdit(task)" aria-label="Edit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteTask(task)" aria-label="Delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </mat-list-item>
+          }
+        </mat-list>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>
