@@ -51,4 +51,4 @@ backend/.env
 
 backend/node_modules/
 
-frontend/toDo/node_modules/
+frontend/toDolist/node_modules/
